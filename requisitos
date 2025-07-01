@@ -1,0 +1,6 @@
+nicegui
+docker
+tortoise-orm 
+aiomysql
+python-jose[cryptography]
+passlib[bcrypt]
