@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-from frontend.componentes import Router
+from componentes.router import Router
 
 from nicegui import ui
 
-
 @ui.page('/')  # normal index page (e.g. the entry point of the app)
 @ui.page('/{_:path}')  # all other pages will be handled by the router but must be registered to also show the SPA index page
-def main():
+
+def estudiante():
     router = Router()
 
     @router.add('/')
@@ -30,5 +30,5 @@ def main():
     # this places the content which should be displayed
     router.frame().classes('w-full p-4 bg-gray-100')
 
-
+estudiante()
 ui.run()
