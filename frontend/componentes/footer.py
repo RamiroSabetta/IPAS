@@ -1,5 +1,5 @@
 from nicegui import ui
-from assets import FuncionHora
+from assets import funcion_hora
 
 class Footer:
     def __init__(self):
@@ -14,7 +14,7 @@ class Footer:
         return self.footer
     
     def actualizarFechaHora(self):
-            self.labelHora.text = FuncionHora.obtenerHora()
-            self.labelFecha.text = FuncionHora.obtenerFecha()
+            self.labelHora.text = funcion_hora.obtenerHora()
+            self.labelFecha.text = funcion_hora.obtenerFecha()
             
     
