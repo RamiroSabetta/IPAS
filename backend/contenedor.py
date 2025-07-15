@@ -3,7 +3,7 @@ from tortoise.contrib.pydantic import pydantic_model_creator
 from models.contenedor import Contenedor
 from models.asignacion import Asignacion
 from models.usuario import Usuario
-from backend.auth import get_current_user
+from auth import get_current_user
 from typing import List
 
 router = APIRouter()
