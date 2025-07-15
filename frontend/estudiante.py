@@ -1,13 +1,17 @@
 from componentes.router import Router
-from nicegui import ui, html
+from nicegui import ui, html, app
 from componentes.footer import Footer
 from componentes.header import Header
 from componentes.menu_lateral import MenuLateral
+from componentes.mis_documentos import mis_documentos
+from componentes.mis_contenedores import mis_contenedores
+
+router = Router()
 
 @ui.page('/estudiante')
 def estudiante():
     # Validación de perfil
-    perfil = ui.app.storage.user.get('perfil', '').lower()
+    perfil = app.storage.user.get('perfil', '').lower()
     if perfil != 'estudiante':
         if perfil == 'administrador':
             ui.navigate.to('/administrador')
@@ -15,7 +19,7 @@ def estudiante():
             ui.navigate.to('/login')
         return
 
-    router = Router()
+    
 
     @router.add('/')
     def show_one():
