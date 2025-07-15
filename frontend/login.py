@@ -76,7 +76,7 @@ def login(redirect_to: str = '/') -> Optional[RedirectResponse]:
         return RedirectResponse('/')
     with ui.row().classes('justify-center items-center self-center pt-14'):
         ui.label('IPAS').classes('text-4xl italic')
-        ui.image('./Frontend/Images/Logo.png').classes('w-20')
+        ui.image('./frontend/assets/logo.png').classes('w-20')
         
     with ui.card().classes('absolute-center gap-10'):
         

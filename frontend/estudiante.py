@@ -83,7 +83,7 @@ with html.section().classes('w-full justify-evenly') as main:
     with ui.row().classes('items-center justify-center p-0 m-0 gap-0 flex-col sm:flex-row ') as home:
         ui.label('Empieza a Programar Rápido, Desde Cualquier Lugar').classes('text-center sm:text-left text-3xl lg:text-7xl md:text-5xl w-[50%] font-extrabold font-sans')
         
-        ui.image('./Frontend/Images/Logo.png').classes('w-[35%] p-0 m-0')
+        ui.image('./assets/logo.png').classes('w-[35%] p-0 m-0')
     
     with ui.column().classes('w-50 justify-evenly items-center') as misContenedores:
         contenedores = ui.table(columns=columns, rows=rows, row_key='nombre').classes('text-black text-center')
