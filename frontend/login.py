@@ -11,7 +11,6 @@ unrestricted_page_routes = {'/login'}
 
 BACKEND_URL = "http://localhost:8000"
 
-
 class AuthMiddleware(BaseHTTPMiddleware):
     """This middleware restricts access to all NiceGUI pages.
 
