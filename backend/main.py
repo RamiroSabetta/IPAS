@@ -10,7 +10,7 @@ app.include_router(contenedor_router)
 
 register_tortoise(
     app,
-    db_url="mysql://root:1234@192.168.1.10/ipas",
+    db_url="mysql://root:1234@192.168.192.100/ipas",
     modules={"models": ["models"]},
     generate_schemas=True,
     add_exception_handlers=True,

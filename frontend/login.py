@@ -9,7 +9,7 @@ from nicegui import app, ui
 
 unrestricted_page_routes = {'/login'}
 
-BACKEND_URL = "http://localhost:8000"
+BACKEND_URL = "http://localhost:8001"
 
 
 class AuthMiddleware(BaseHTTPMiddleware):
