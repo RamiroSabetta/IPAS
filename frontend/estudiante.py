@@ -4,10 +4,17 @@ from componentes.footer import Footer
 from componentes.header import Header
 from componentes.menu_lateral import MenuLateral
 
-@ui.page('/')  # normal index page (e.g. the entry point of the app)
-@ui.page('/{_:path}')  # all other pages will be handled by the router but must be registered to also show the SPA index page
-
+@ui.page('/estudiante')
 def estudiante():
+    # Validación de perfil
+    perfil = ui.app.storage.user.get('perfil', '').lower()
+    if perfil != 'estudiante':
+        if perfil == 'administrador':
+            ui.navigate.to('/administrador')
+        else:
+            ui.navigate.to('/login')
+        return
+
     router = Router()
 
     @router.add('/')

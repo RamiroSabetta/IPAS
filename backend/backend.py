@@ -1,12 +1,10 @@
 from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
 from auth import router as auth_router
-from contenedor import router as contenedor_router
 
 app = FastAPI()
 
 app.include_router(auth_router)
-app.include_router(contenedor_router)
 
 register_tortoise(
     app,
@@ -18,4 +16,4 @@ register_tortoise(
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="127.0.0.1", port=8001, reload=True) 
+    uvicorn.run("main:app", host="127.0.0.1", port=8001, reload=True)

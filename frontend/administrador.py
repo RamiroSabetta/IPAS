@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
-from frontend.componentes import Router
+from componentes.router import Router
 
-from nicegui import ui
+from nicegui import app, ui
 
 
-@ui.page('/')  # normal index page (e.g. the entry point of the app)
-@ui.page('/{_:path}')  # all other pages will be handled by the router but must be registered to also show the SPA index page
+@ui.page('/administrador')
 def main():
+    # Validación de perfil
+    perfil = app.storage.user.get('perfil', '').lower()
+    if perfil != 'administrador':
+        if perfil == 'estudiante':
+            ui.navigate.to('/estudiante')
+        else:
+            ui.navigate.to('/login')
+        return
+
     router = Router()
 
     @router.add('/')

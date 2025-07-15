@@ -1,22 +1,15 @@
 #!/usr/bin/env python3
-"""This is just a simple authentication example.
-
-Please see the `OAuth2 example at FastAPI <https://fastapi.tiangolo.com/tutorial/security/simple-oauth2/>`_  or
-use the great `Authlib package <https://docs.authlib.org/en/v0.13/client/starlette.html#using-fastapi>`_ to implement a classing real authentication system.
-Here we just demonstrate the NiceGUI integration.
-"""
 from typing import Optional
-
+import requests
 from fastapi import Request
 from fastapi.responses import RedirectResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from nicegui import app, ui
 
-# in reality users passwords would obviously need to be hashed
-passwords = {'user1': 'pass1', 'user2': 'pass2'}
-
 unrestricted_page_routes = {'/login'}
+
+BACKEND_URL = "http://localhost:8000"
 
 
 class AuthMiddleware(BaseHTTPMiddleware):
@@ -52,12 +45,32 @@ def test_page() -> None:
 
 @ui.page('/login')
 def login(redirect_to: str = '/') -> Optional[RedirectResponse]:
-    def try_login() -> None:  # local function to avoid passing username and password as arguments
-        if passwords.get(username.value) == password.value:
-            app.storage.user.update({'username': username.value, 'authenticated': True})
-            ui.navigate.to(redirect_to)  # go back to where the user wanted to go
-        else:
-            ui.notify('Ingresa tu Usuario y Contraseña', color='negative')
+    def try_login() -> None:
+        data = {"username": username.value, "password": password.value}
+        try:
+            response = requests.post(f"{BACKEND_URL}/login", json=data)
+            if response.status_code == 200:
+                token = response.json()["access_token"]
+                headers = {"Authorization": f"Bearer {token}"}
+                me_response = requests.get(f"{BACKEND_URL}/me", headers=headers)
+                if me_response.status_code == 200:
+                    perfil = me_response.json().get("perfil", "")
+                    app.storage.user.update({
+                        'username': username.value,
+                        'authenticated': True,
+                        'token': token,
+                        'perfil': perfil
+                    })
+                    if perfil.lower() == 'administrador':
+                        ui.navigate.to('/administrador')
+                    else:
+                        ui.navigate.to('/estudiante')
+                else:
+                    ui.notify('No se pudo obtener el perfil del usuario', color='negative')
+            else:
+                ui.notify('Usuario o contraseña incorrectos', color='negative')
+        except Exception as e:
+            ui.notify(f'Error de conexión: {e}', color='negative')
     
     if app.storage.user.get('authenticated', False):
         return RedirectResponse('/')

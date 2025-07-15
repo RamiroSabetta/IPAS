@@ -4,3 +4,8 @@ tortoise-orm
 aiomysql
 python-jose[cryptography]
 passlib[bcrypt]
+requests
+pytest
+fastapi
+uvicorn
+pydantic
