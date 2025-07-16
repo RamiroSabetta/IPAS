@@ -1,7 +1,7 @@
 from nicegui import ui
 
 class MenuLateral:
-    def __init__(self, opciones, usuario):
+    def __init__(self, opciones, usuario, on_logout=None):
         self.botones = {}
         self.opciones = opciones
         with ui.left_drawer(value=False).classes('bg-blue-300 items-center justify-evenly z-40').props('overlay') as self.menuLateral:
@@ -20,7 +20,7 @@ class MenuLateral:
                 ui.label(usuario['rol'])
 
             with ui.column() as contenedorBoton:
-                ui.button('Cerrar Sesión').classes('w-[180px] h-auto text-center items-center text-black')
+                ui.button('Cerrar Sesión', on_click=on_logout).classes('w-[180px] h-auto text-center items-center text-black')
                 
 
     def setOpciones(self, opcion):
