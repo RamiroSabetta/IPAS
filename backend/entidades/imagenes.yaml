@@ -1,0 +1,32 @@
+entidad: Imagenes
+tabla: imagenes
+descripcion: Gestión de imágenes de contenedores
+campos:
+  id:
+    tipo: integer
+    pk: true
+  ubicacion:
+    tipo: string
+    max: 255
+    required: true
+    ejemplo: "docker.io/library/ubuntu:22.04"
+  nombre:
+    tipo: string
+    max: 100
+    required: true
+    ejemplo: "Ubuntu 22.04 Base"
+  comandos:
+    tipo: text
+    required: false
+    ejemplo: "apt update && apt install -y apache2"
+  logo:
+    tipo: string
+    max: 255
+    required: false
+    ejemplo: "https://example.com/ubuntu-logo.png"
+  sistemaOperativo:
+    tipo: integer
+    fk: sistemas_operativos.id
+    required: true
+permisos:
+  admin: [r, w, d]

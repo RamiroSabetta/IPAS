@@ -1,0 +1,35 @@
+entidad: Usuario
+tabla: usuarios
+descripcion: Gestión de usuarios del sistema
+campos:
+  id:
+    tipo: integer
+    pk: true
+  nombre:
+    tipo: string
+    max: 100
+    required: true
+    ejemplo: "Juan Pérez"
+  email:
+    tipo: string
+    max: 255
+    required: true
+    ejemplo: "juan@ejemplo.com"
+  password:
+    tipo: string
+    max: 255
+    required: true
+  rol:
+    tipo: string
+    max: 50
+    required: true
+    ejemplo: "admin"
+  habilitado:
+    tipo: boolean
+    required: true
+    ejemplo: true
+permisos:
+  admin: [r, w, d]
+  estudiante:
+    yo:
+      campo_usuario: id

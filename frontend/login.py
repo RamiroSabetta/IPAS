@@ -5,10 +5,9 @@ from fastapi.responses import RedirectResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from nicegui import app, ui
+from config import BACKEND_URL, LOGIN_ROUTE, ADMIN_ROUTE, STUDENT_ROUTE, MAIN_ROUTE
 
-unrestricted_page_routes = {'/login'}
-
-BACKEND_URL = "http://localhost:8001"
+unrestricted_page_routes = {LOGIN_ROUTE}
 
 print('[LOGIN] Archivo login.py importado')
 
@@ -21,18 +20,18 @@ class AuthMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         if not app.storage.user.get('authenticated', False):
             if not request.url.path.startswith('/_nicegui') and request.url.path not in unrestricted_page_routes:
-                return RedirectResponse(f'/login?redirect_to={request.url.path}')
+                return RedirectResponse(f'{LOGIN_ROUTE}?redirect_to={request.url.path}')
         return await call_next(request)
 
 
 def register_routes():
     app.add_middleware(AuthMiddleware)
 
-    @ui.page('/')
+    @ui.page(MAIN_ROUTE)
     def main_page() -> None:
         def logout() -> None:
             app.storage.user.clear()
-            ui.navigate.to('/login')
+            ui.navigate.to(LOGIN_ROUTE)
 
         with ui.column().classes('absolute-center items-center'):
             ui.label(f'Hello {app.storage.user["username"]}!').classes('text-2xl')
@@ -42,18 +41,20 @@ def register_routes():
     def test_page() -> None:
         ui.label('This is a sub page.')
 
-    @ui.page('/login')
-    def login(redirect_to: str = '/') -> Optional[RedirectResponse]:
+    @ui.page(LOGIN_ROUTE)
+    def login(redirect_to: str = MAIN_ROUTE) -> Optional[RedirectResponse]:
         print('[LOGIN] Entrando a la función login()')
         def try_login() -> None:
             print('[LOGIN] Intentando login con usuario:', username.value)
             data = {"username": username.value, "password": password.value}
             try:
-                response = requests.post(f"{BACKEND_URL}/login", json=data)
+                # Usar el endpoint correcto según openapi.json: /api/auth/login
+                response = requests.post(f"{BACKEND_URL}/api/auth/login", json=data)
                 if response.status_code == 200:
                     token = response.json()["access_token"]
                     headers = {"Authorization": f"Bearer {token}"}
-                    me_response = requests.get(f"{BACKEND_URL}/me", headers=headers)
+                    # Usar el endpoint correcto según openapi.json: /api/auth/me
+                    me_response = requests.get(f"{BACKEND_URL}/api/auth/me", headers=headers)
                     if me_response.status_code == 200:
                         perfil = me_response.json().get("perfil", "")
                         app.storage.user.update({
@@ -63,9 +64,9 @@ def register_routes():
                             'perfil': perfil
                         })
                         if perfil.lower() == 'administrador':
-                            ui.navigate.to('/administrador')
+                            ui.navigate.to(ADMIN_ROUTE)
                         else:
-                            ui.navigate.to('/estudiante')
+                            ui.navigate.to(STUDENT_ROUTE)
                     else:
                         ui.notify('No se pudo obtener el perfil del usuario', color='negative')
                 else:
@@ -74,7 +75,7 @@ def register_routes():
                 ui.notify(f'Error de conexión: {e}', color='negative')
         
         if app.storage.user.get('authenticated', False):
-            return RedirectResponse('/')
+            return RedirectResponse(MAIN_ROUTE)
         
         with ui.card().classes('absolute-center gap-8 w-[450px] h-fit'):
             with ui.row().classes('justify-center items-center self-center pt-5'):

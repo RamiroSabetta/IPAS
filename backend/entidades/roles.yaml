@@ -1,0 +1,14 @@
+entidad: Roles
+tabla: roles
+descripcion: Gestión de roles de usuario
+campos:
+  id:
+    tipo: integer
+    pk: true
+  rol:
+    tipo: string
+    max: 100
+    required: true
+    ejemplo: "admin"
+permisos:
+  admin: [r, w, d]

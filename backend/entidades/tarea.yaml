@@ -1,0 +1,32 @@
+entidad: Tarea
+tabla: tareas
+descripcion: Gestión de tareas
+campos:
+  id:
+    tipo: integer
+    pk: true
+  titulo:
+    tipo: string
+    max: 200
+    required: true
+    ejemplo: "Completar documentación"
+  descripcion:
+    tipo: text
+    required: false
+    ejemplo: "Documentar la API del proyecto"
+  completada:
+    tipo: boolean
+    required: true
+    ejemplo: false
+  usuario_id:
+    tipo: integer
+    fk: usuarios.id
+    required: true
+  fecha_creacion:
+    tipo: datetime
+    required: true
+permisos:
+  admin: [r, w, d]
+  estudiante:
+    yo:
+      campo_usuario: usuario_id

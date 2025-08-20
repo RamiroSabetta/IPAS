@@ -1,0 +1,19 @@
+entidad: SistemasOperativos
+tabla: sistemas_operativos
+descripcion: Gestión de sistemas operativos disponibles
+campos:
+  id:
+    tipo: integer
+    pk: true
+  nombre:
+    tipo: string
+    max: 100
+    required: true
+    ejemplo: "Ubuntu 22.04"
+  logo:
+    tipo: string
+    max: 255
+    required: false
+    ejemplo: "https://example.com/ubuntu-logo.png"
+permisos:
+  admin: [r, w, d]

@@ -1,0 +1,49 @@
+entidad: Contenedores
+tabla: contenedores
+descripcion: Gestión de contenedores de usuarios
+campos:
+  id:
+    tipo: integer
+    pk: true
+  nombre:
+    tipo: string
+    max: 100
+    required: true
+    ejemplo: "mi-aplicacion-web"
+  http:
+    tipo: integer
+    required: false
+    ejemplo: 8080
+  https:
+    tipo: integer
+    required: false
+    ejemplo: 8443
+  puertos:
+    tipo: text
+    required: false
+    ejemplo: "8080:80,8443:443"
+  redes:
+    tipo: text
+    required: false
+    ejemplo: "bridge,host"
+  variables:
+    tipo: text
+    required: false
+    ejemplo: "DB_HOST=localhost,DB_PORT=3306"
+  volumenes:
+    tipo: text
+    required: false
+    ejemplo: "/host/data:/container/data"
+  imagen:
+    tipo: integer
+    fk: imagenes.id
+    required: true
+  usuario:
+    tipo: integer
+    fk: usuarios.id
+    required: true
+permisos:
+  admin: [r, w, d]
+  estudiante:
+    yo:
+      campo_usuario: usuario

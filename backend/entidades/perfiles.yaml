@@ -1,0 +1,36 @@
+entidad: Perfiles
+tabla: perfiles
+descripcion: Gestión de perfiles de usuario
+campos:
+  id:
+    tipo: integer
+    pk: true
+  nombre:
+    tipo: string
+    max: 100
+    required: true
+    ejemplo: "Juan"
+  apellido:
+    tipo: string
+    max: 100
+    required: true
+    ejemplo: "Pérez"
+  email:
+    tipo: string
+    max: 255
+    required: true
+    ejemplo: "juan.perez@example.com"
+  imagen:
+    tipo: string
+    max: 255
+    required: false
+    ejemplo: "https://example.com/avatar.jpg"
+  usuario:
+    tipo: integer
+    fk: usuarios.id
+    required: true
+permisos:
+  admin: [r, w, d]
+  estudiante:
+    yo:
+      campo_usuario: usuario

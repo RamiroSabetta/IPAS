@@ -1,0 +1,15 @@
+# Dependencias para el frontend de IPAS
+# Framework web para la interfaz de usuario
+nicegui>=1.4.0
+
+# Cliente HTTP para realizar peticiones al backend
+requests>=2.31.0
+
+# Framework web para el middleware de autenticación
+fastapi>=0.104.0
+
+# Middleware para Starlette/FastAPI
+starlette>=0.27.0
+
+# Utilidades adicionales
+python-multipart>=0.0.6

@@ -1,0 +1,23 @@
+entidad: Aplicaciones
+tabla: aplicaciones
+descripcion: Gestión de aplicaciones disponibles
+campos:
+  id:
+    tipo: integer
+    pk: true
+  nombre:
+    tipo: string
+    max: 100
+    required: true
+    ejemplo: "Apache Web Server"
+  comando:
+    tipo: string
+    max: 255
+    required: true
+    ejemplo: "apache2ctl start"
+  sistemaOperativo:
+    tipo: integer
+    fk: sistemas_operativos.id
+    required: true
+permisos:
+  admin: [r, w, d]

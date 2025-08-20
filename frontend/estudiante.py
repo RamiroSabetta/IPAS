@@ -1,10 +1,11 @@
-from frontend.componentes.router import Router
+from componentes.router import Router
 from nicegui import ui, html, app
-from frontend.componentes.footer import Footer
-from frontend.componentes.header import Header
-from frontend.componentes.menu_lateral import MenuLateral
-from frontend.componentes.mis_documentos import mis_documentos
-from frontend.componentes.mis_contenedores import mis_contenedores
+from componentes.footer import Footer
+from componentes.header import Header
+from componentes.menu_lateral import MenuLateral
+from componentes.mis_documentos import mis_documentos
+from componentes.mis_contenedores import mis_contenedores
+from config import STUDENT_ROUTE, ADMIN_ROUTE, LOGIN_ROUTE
 
 print('[ESTUDIANTE] Archivo estudiante.py importado')
 
@@ -37,18 +38,18 @@ def register_routes():
         {'descripcion':'Galeria de imagenes','nombre': 'Krita', 'imagen': 'krita', 'estado':'Activo', 'puertos': 3004, 'link':'http://anexo328server:3004'},
         {'descripcion':'Aplicaciones de Ofimatica','nombre': 'Libreoffice', 'imagen': 'libreoffice', 'estado':'Activo', 'puertos': 3006, 'link':'http://anexo328server:3006'},
     ]
-    @ui.page('/estudiante')
+    @ui.page(STUDENT_ROUTE)
     def estudiante():
         perfil = app.storage.user.get('perfil', '').lower()
         if perfil != 'estudiante':
             if perfil == 'administrador':
-                ui.navigate.to('/administrador')
+                ui.navigate.to(ADMIN_ROUTE)
             else:
-                ui.navigate.to('/login')
+                ui.navigate.to(LOGIN_ROUTE)
             return
         home = None
         misContenedores = None
-        @router.add('/estudiante')
+        @router.add(STUDENT_ROUTE)
         def show_one():
             nonlocal home
             with html.section().classes('w-full justify-evenly') as main:
@@ -71,7 +72,7 @@ def register_routes():
             ui.notification(texto)
         def logout():
             app.storage.user.clear()
-            ui.navigate.to('/login')
+            ui.navigate.to(LOGIN_ROUTE)
         menuLateral = MenuLateral(opcionesMenu, usuario, on_logout=logout)
         header = Header(menuLateral.getMenuLateral(), None)
         header.getHeader()
@@ -95,5 +96,5 @@ def register_routes():
         try:
             old_open(target)
         except KeyError:
-            ui.navigate.to('/login')
+            ui.navigate.to(LOGIN_ROUTE)
     router.open = safe_open

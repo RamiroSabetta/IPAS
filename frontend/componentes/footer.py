@@ -1,5 +1,5 @@
 from nicegui import ui
-from frontend.assets import funcion_hora
+from assets import funcion_hora
 
 class Footer:
     def __init__(self):

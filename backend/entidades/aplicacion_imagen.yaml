@@ -1,0 +1,17 @@
+entidad: AplicacionImagen
+tabla: aplicacion_imagen
+descripcion: Relación entre aplicaciones e imágenes
+campos:
+  id:
+    tipo: integer
+    pk: true
+  aplicacion:
+    tipo: integer
+    fk: aplicaciones.id
+    required: true
+  imagen:
+    tipo: integer
+    fk: imagenes.id
+    required: true
+permisos:
+  admin: [r, w, d]

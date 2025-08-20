@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
-from frontend.componentes.router import Router
+from componentes.router import Router
+from config import ADMIN_ROUTE, STUDENT_ROUTE, LOGIN_ROUTE
 
 from nicegui import app, ui
 
 print('[ADMIN] Archivo administrador.py importado')
 
 def register_routes():
-    @ui.page('/administrador')
+    @ui.page(ADMIN_ROUTE)
     def main():
         print('[ADMIN] Entrando a la función main() de administrador')
         perfil = app.storage.user.get('perfil', '').lower()
         if perfil != 'administrador':
             if perfil == 'estudiante':
-                ui.navigate.to('/estudiante')
+                ui.navigate.to(STUDENT_ROUTE)
             else:
-                ui.navigate.to('/login')
+                ui.navigate.to(LOGIN_ROUTE)
             return
         router = Router()
         @router.add('/')
