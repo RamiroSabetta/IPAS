@@ -55,7 +55,7 @@ def register_routes():
             with html.section().classes('w-full h-[71dvh] justify-evenly') as main:
                 with ui.row().classes('items-center justify-center p-0 m-0 gap-0 flex-col sm:flex-row ') as _home:
                     home = _home
-                    ui.label('Empieza a Programar Rápido, Desde Cualquier Lugar').classes('text-center sm:text-left text-3xl lg:text-7xl md:text-5xl w-[50%] font-extrabold font-sans')
+                    ui.label('Empieza a Programar Rápido, Desde Cualquier Lugar.').classes('text-center sm:text-left text-3xl lg:text-7xl md:text-5xl w-[50%] font-extrabold font-sans')
                     ui.image('../frontend/assets/logo.png').classes('w-[35%] p-0 m-0')
         @router.add('/miscontenedores')
         def mostrar_mis_contenedores():
