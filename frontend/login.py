@@ -56,19 +56,19 @@ def register_routes():
                     # Usar el endpoint correcto según openapi.json: /api/auth/me
                     me_response = requests.get(f"{BACKEND_URL}/api/auth/me", headers=headers)
                     if me_response.status_code == 200:
-                        perfil = me_response.json().get("perfil", "")
+                        rol = me_response.json().get("rol", "")
                         app.storage.user.update({
                             'username': username.value,
                             'authenticated': True,
                             'token': token,
-                            'perfil': perfil
+                            'rol': rol
                         })
-                        if perfil.lower() == 'administrador':
+                        if rol.lower() == 'administrador':
                             ui.navigate.to(ADMIN_ROUTE)
                         else:
                             ui.navigate.to(STUDENT_ROUTE)
                     else:
-                        ui.notify('No se pudo obtener el perfil del usuario', color='negative')
+                        ui.notify('No se pudo obtener el rol del usuario', color='negative')
                 else:
                     ui.notify('Usuario o contraseña incorrectos', color='negative')
             except Exception as e:

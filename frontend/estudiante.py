@@ -40,9 +40,9 @@ def register_routes():
     ]
     @ui.page(STUDENT_ROUTE)
     def estudiante():
-        perfil = app.storage.user.get('perfil', '').lower()
-        if perfil != 'estudiante':
-            if perfil == 'administrador':
+        rol = app.storage.user.get('rol', '').lower()
+        if rol != 'estudiante':
+            if rol == 'administrador':
                 ui.navigate.to(ADMIN_ROUTE)
             else:
                 ui.navigate.to(LOGIN_ROUTE)

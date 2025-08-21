@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from componentes.router import Router
 from config import ADMIN_ROUTE, STUDENT_ROUTE, LOGIN_ROUTE
+from helpers import Helpers
 
 from nicegui import app, ui
 
@@ -10,15 +11,10 @@ def register_routes():
     @ui.page(ADMIN_ROUTE)
     def main():
         print('[ADMIN] Entrando a la función main() de administrador')
-        perfil = app.storage.user.get('perfil', '').lower()
-        if perfil != 'administrador':
-            if perfil == 'estudiante':
-                ui.navigate.to(STUDENT_ROUTE)
-            else:
-                ui.navigate.to(LOGIN_ROUTE)
-            return
+        helpers = Helpers()
+        helpers.verificar_rol_admin(app, ui)
         router = Router()
-        @router.add('/')
+        @router.add('/one')
         def show_one():
             ui.label('Content One').classes('text-2xl')
         @router.add('/two')

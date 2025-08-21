@@ -1,7 +1,7 @@
 # Configuración del frontend de IPAS
 
 # Configuración del backend
-BACKEND_URL = "http://backend:8080"
+BACKEND_URL = "http://192.168.192.150:3081"
 
 # Configuración de la aplicación
 APP_NAME = "IPAS"
@@ -21,4 +21,4 @@ STORAGE_SECRET = "THIS_NEEDS_TO_BE_CHANGED"
 LOGIN_ROUTE = "/login"
 ADMIN_ROUTE = "/administrador"
 STUDENT_ROUTE = "/estudiante"
-MAIN_ROUTE = "/administrador"
+MAIN_ROUTE = "/"
