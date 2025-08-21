@@ -80,7 +80,7 @@ def register_routes():
         with ui.card().classes('absolute-center gap-8 w-[450px] h-fit'):
             with ui.row().classes('justify-center items-center self-center pt-5'):
                 ui.label('IPAS').classes('text-4xl italic')
-                ui.image('./frontend/assets/logo.png').classes('w-20')
+                ui.image('../frontend/assets/logo.png').classes('w-20')
             ui.separator().classes('w-full')
             with ui.column().classes('items-center self-center'):
                 username = ui.input('Nombre de usuario', validation={'El valor del campo excede el máximo de carácteres': lambda value: len(value) < 50}).on('keydown.enter', try_login).classes('w-full')
