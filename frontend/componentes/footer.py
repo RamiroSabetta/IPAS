@@ -5,8 +5,8 @@ class Footer:
     def __init__(self):
 
         with ui.footer().classes('w-full p-1 justify-between items-center h-12') as self.footer:
-            ui.label('Diseñado y Desarrollado por Marcos García y Ramiro Sabetta').classes('text-sm')
-            with ui.column().classes('gap-0 p-1 justify-end') as self.contenedorFechaHora:
+            ui.label('Diseñado y Desarrollado por Marcos García y Ramiro Sabetta').classes('text-sm ml-[10px]')
+            with ui.column().classes('gap-0 p-1 justify-end mr-[10px]') as self.contenedorFechaHora:
                 self.labelHora = ui.label().classes('text-black')
                 self.labelFecha = ui.label().classes('text-black')
 

@@ -8,7 +8,7 @@ class Header:
             with ui.row().classes('items-center'):
                 with ui.button(on_click=self.home).props('unelevated') as self.irHome:
                     html.h1('IPAS').classes('text-5xl font-extrabold font-sans')
-                ui.html('<h2>Infraestructura Plataforma Ambiente Servicio</h2>').classes('text-lg text-gray-600 italic')
+                ui.html('<h2>Infraestructura, Plataforma, Ambiente y Servicio</h2>').classes('text-lg text-gray-600 italic ml-[10px]')
 
     def getHeader(self):
         return self.header
