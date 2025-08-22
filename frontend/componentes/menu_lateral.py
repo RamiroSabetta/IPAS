@@ -16,8 +16,8 @@ class MenuLateral:
                 ui.icon('person', color='white').classes('text-[8em]')
 
             with ui.column().classes('items-center justify-center') as contenedorInfoUsuario:
-                ui.label(usuario['nombre']).classes('w-[180px] text-center border-2 pt-2 pb-2 rounded-sm border-[#B8E1FF]')
-                ui.label(usuario['rol']).classes('w-[180px] text-center border-2 pt-2 pb-2 rounded-sm border-[#B8E1FF]')
+                ui.label(usuario['nombre']).classes('w-[180px] text-center border-2 pt-2 pb-2 rounded-sm border-[#B8E1FF] font-bold')
+                ui.label(usuario['rol']).classes('w-[180px] text-center border-2 pt-2 pb-2 rounded-sm border-[#B8E1FF] font-bold')
 
             with ui.column() as contenedorBoton:
                 ui.button('Cerrar Sesión', on_click=on_logout).classes('w-[180px] h-auto text-center items-center text-black')
